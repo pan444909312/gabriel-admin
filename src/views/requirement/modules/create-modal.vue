@@ -24,14 +24,17 @@ async function handleConfirm() {
     return;
   }
   loading.value = true;
-  const { error } = await fetchCreateRequirement(name.value.trim());
-  loading.value = false;
-  if (!error) {
-    message.success('创建成功');
-    visible.value = false;
-    emit('success');
-  } else {
-    message.error(error.message || '创建失败');
+  try {
+    const { error } = await fetchCreateRequirement(name.value.trim());
+    if (!error) {
+      message.success('创建成功');
+      visible.value = false;
+      emit('success');
+    } else {
+      message.error(error.message || '创建失败');
+    }
+  } finally {
+    loading.value = false;
   }
 }
 
