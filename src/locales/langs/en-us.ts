@@ -307,6 +307,47 @@ const local: App.I18n.Schema = {
         desc5: 'Soybean just wrote some of the workbench pages casually, and it was enough to see!'
       },
       creativity: 'Creativity'
+    },
+    requirement: {
+      title: 'Requirements',
+      createBtn: 'New Requirement',
+      searchPlaceholder: 'Search requirement name...',
+      columns: {
+        index: '#',
+        name: 'Name',
+        status: 'Status',
+        createTime: 'Created At',
+        action: 'Actions'
+      },
+      status: {
+        pending: 'Pending',
+        decomposing: 'Decomposing',
+        decomposed: 'Decomposed',
+        generating: 'Generating',
+        done: 'Done',
+        failed: 'Failed'
+      },
+      actions: {
+        upload: 'Upload',
+        reUpload: 'Re-upload',
+        decompose: 'Decompose',
+        generate: 'Generate',
+        downloadMd: 'Download MD',
+        downloadXmind: 'Download XMind',
+        retry: 'Retry',
+        delete: 'Delete'
+      },
+      createModal: {
+        title: 'New Requirement',
+        namePlaceholder: 'Enter requirement name'
+      },
+      uploadModal: {
+        title: 'Upload Files',
+        requirementFile: 'Requirement Doc',
+        techFile: 'Tech Spec',
+        requirementFileTip: 'Upload a .md requirement document',
+        techFileTip: 'Optional: upload a .md tech spec document'
+      }
     }
   },
   form: {

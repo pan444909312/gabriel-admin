@@ -555,6 +555,47 @@ declare namespace App {
           };
           creativity: string;
         };
+        requirement: {
+          title: string;
+          createBtn: string;
+          searchPlaceholder: string;
+          columns: {
+            index: string;
+            name: string;
+            status: string;
+            createTime: string;
+            action: string;
+          };
+          status: {
+            pending: string;
+            decomposing: string;
+            decomposed: string;
+            generating: string;
+            done: string;
+            failed: string;
+          };
+          actions: {
+            upload: string;
+            reUpload: string;
+            decompose: string;
+            generate: string;
+            downloadMd: string;
+            downloadXmind: string;
+            retry: string;
+            delete: string;
+          };
+          createModal: {
+            title: string;
+            namePlaceholder: string;
+          };
+          uploadModal: {
+            title: string;
+            requirementFile: string;
+            techFile: string;
+            requirementFileTip: string;
+            techFileTip: string;
+          };
+        };
       };
       form: {
         required: string;

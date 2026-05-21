@@ -303,6 +303,47 @@ const local: App.I18n.Schema = {
         desc5: 'Soybean 刚才把工作台页面随便写了一些，凑合能看了！'
       },
       creativity: '创意'
+    },
+    requirement: {
+      title: '需求管理',
+      createBtn: '新建需求',
+      searchPlaceholder: '搜索需求名称...',
+      columns: {
+        index: '序号',
+        name: '需求名称',
+        status: '状态',
+        createTime: '创建时间',
+        action: '操作'
+      },
+      status: {
+        pending: '待处理',
+        decomposing: '拆解中',
+        decomposed: '拆解完成',
+        generating: '生成中',
+        done: '已完成',
+        failed: '失败'
+      },
+      actions: {
+        upload: '上传文件',
+        reUpload: '重新上传',
+        decompose: '触发拆解',
+        generate: '生成用例',
+        downloadMd: '下载 MD',
+        downloadXmind: '下载 XMind',
+        retry: '重试',
+        delete: '删除'
+      },
+      createModal: {
+        title: '新建需求',
+        namePlaceholder: '请输入需求名称'
+      },
+      uploadModal: {
+        title: '上传文件',
+        requirementFile: '需求文档',
+        techFile: '技术方案',
+        requirementFileTip: '请上传 .md 格式的需求文档',
+        techFileTip: '选填，上传 .md 格式的技术方案文档'
+      }
     }
   },
   form: {
