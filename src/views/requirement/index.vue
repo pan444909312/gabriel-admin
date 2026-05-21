@@ -287,36 +287,38 @@ onUnmounted(() => stopPolling());
 </script>
 
 <template>
-  <NCard>
-    <NSpace vertical :size="12">
-      <NSpace align="center">
-        <NButton type="primary" @click="createModalRef?.open()">+ {{ $t('page.requirement.createBtn') }}</NButton>
-        <NInput
-          v-model:value="searchName"
-          :placeholder="$t('page.requirement.searchPlaceholder')"
-          clearable
-          style="width: 260px"
-          @keydown.enter="refresh"
-        />
-        <NButton @click="refresh">{{ $t('common.refresh') }}</NButton>
+  <div>
+    <NCard>
+      <NSpace vertical :size="12">
+        <NSpace align="center">
+          <NButton type="primary" @click="createModalRef?.open()">+ {{ $t('page.requirement.createBtn') }}</NButton>
+          <NInput
+            v-model:value="searchName"
+            :placeholder="$t('page.requirement.searchPlaceholder')"
+            clearable
+            style="width: 260px"
+            @keydown.enter="refresh"
+          />
+          <NButton @click="refresh">{{ $t('common.refresh') }}</NButton>
+        </NSpace>
+
+        <NDataTable :columns="columns" :data="data" :loading="loading" :pagination="false" size="small" />
+
+        <NSpace justify="end">
+          <NPagination
+            v-model:page="current"
+            v-model:page-size="size"
+            :item-count="total"
+            :page-sizes="[10, 20, 50]"
+            show-size-picker
+            @update:page="refresh"
+            @update:page-size="refresh"
+          />
+        </NSpace>
       </NSpace>
+    </NCard>
 
-      <NDataTable :columns="columns" :data="data" :loading="loading" :pagination="false" size="small" />
-
-      <NSpace justify="end">
-        <NPagination
-          v-model:page="current"
-          v-model:page-size="size"
-          :item-count="total"
-          :page-sizes="[10, 20, 50]"
-          show-size-picker
-          @update:page="refresh"
-          @update:page-size="refresh"
-        />
-      </NSpace>
-    </NSpace>
-  </NCard>
-
-  <CreateModal ref="createModalRef" @success="refresh" />
-  <UploadModal ref="uploadModalRef" @success="refresh" />
+    <CreateModal ref="createModalRef" @success="refresh" />
+    <UploadModal ref="uploadModalRef" @success="refresh" />
+  </div>
 </template>
