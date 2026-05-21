@@ -74,5 +74,16 @@ export const generatedRoutes: GeneratedRoute[] = [
       constant: true,
       hideInMenu: true
     }
+  },
+  {
+    name: 'requirement',
+    path: '/requirement',
+    component: 'layout.base$view.requirement',
+    meta: {
+      title: 'requirement',
+      i18nKey: 'route.requirement',
+      icon: 'mdi:file-document-outline',
+      order: 2
+    }
   }
 ];
