@@ -169,7 +169,7 @@ const columns = computed<DataTableColumns<Api.Requirement.Item>>(() => [
     key: 'createTime',
     title: $t('page.requirement.columns.createTime'),
     width: 160,
-    render: row => row.createTime?.slice(0, 16) ?? '-'
+    render: row => row.createTime?.slice(0, 16).replace('T', ' ') ?? '-'
   },
   {
     key: 'action',
