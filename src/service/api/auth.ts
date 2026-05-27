@@ -8,18 +8,25 @@ import { request } from '../request';
  */
 export function fetchLogin(userName: string, password: string) {
   return request<Api.Auth.LoginToken>({
-    url: '/auth/login',
+    url: '/api/gabriel/user/login',
     method: 'post',
     data: {
-      userName,
+      username: userName,
       password
     }
   });
 }
 
-/** Get user info */
-export function fetchGetUserInfo() {
-  return request<Api.Auth.UserInfo>({ url: '/auth/getUserInfo' });
+/**
+ * Get user info
+ *
+ * @param userId User ID
+ */
+export function fetchGetUserInfo(userId: string) {
+  return request<Api.Auth.UserInfo>({
+    url: '/api/gabriel/user/getUserInfo',
+    params: { userId }
+  });
 }
 
 /**

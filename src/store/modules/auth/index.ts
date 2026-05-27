@@ -133,8 +133,11 @@ export const useAuthStore = defineStore(SetupStoreId.Auth, () => {
     localStg.set('token', loginToken.token);
     localStg.set('refreshToken', loginToken.refreshToken);
 
-    // 2. get user info
-    const pass = await getUserInfo();
+    // 2. parse userId from token payload
+    const userId = parseUserIdFromToken(loginToken.token);
+
+    // 3. get user info
+    const pass = await getUserInfo(userId);
 
     if (pass) {
       token.value = loginToken.token;
@@ -145,8 +148,8 @@ export const useAuthStore = defineStore(SetupStoreId.Auth, () => {
     return false;
   }
 
-  async function getUserInfo() {
-    const { data: info, error } = await fetchGetUserInfo();
+  async function getUserInfo(userId: string) {
+    const { data: info, error } = await fetchGetUserInfo(userId);
 
     if (!error) {
       // update store
@@ -163,11 +166,22 @@ export const useAuthStore = defineStore(SetupStoreId.Auth, () => {
 
     if (maybeToken) {
       token.value = maybeToken;
-      const pass = await getUserInfo();
+      const userId = parseUserIdFromToken(maybeToken);
+      const pass = await getUserInfo(userId);
 
       if (!pass) {
         resetStore();
       }
+    }
+  }
+
+  function parseUserIdFromToken(jwtToken: string): string {
+    try {
+      const payload = jwtToken.split('.')[1];
+      const decoded = JSON.parse(atob(payload));
+      return String(decoded.userId || '');
+    } catch {
+      return '';
     }
   }
 

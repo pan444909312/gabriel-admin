@@ -2,7 +2,7 @@ import { request } from '../request';
 
 export function fetchRequirementPage(params: Api.Requirement.PageParams) {
   return request<Api.Requirement.PageResult>({
-    url: '/requirement/page',
+    url: '/api/gabriel/requirement/page',
     method: 'get',
     params
   });
@@ -10,7 +10,7 @@ export function fetchRequirementPage(params: Api.Requirement.PageParams) {
 
 export function fetchCreateRequirement(name: string) {
   return request<null>({
-    url: '/requirement/create',
+    url: '/api/gabriel/requirement/create',
     method: 'post',
     data: { name }
   });
@@ -18,7 +18,7 @@ export function fetchCreateRequirement(name: string) {
 
 export function fetchUploadRequirement(formData: FormData) {
   return request<null>({
-    url: '/requirement/upload',
+    url: '/api/gabriel/requirement/upload',
     method: 'post',
     data: formData,
     headers: { 'Content-Type': 'multipart/form-data' }
@@ -27,7 +27,7 @@ export function fetchUploadRequirement(formData: FormData) {
 
 export function fetchDecomposeRequirement(id: number) {
   return request<null>({
-    url: '/requirement/decompose',
+    url: '/api/gabriel/requirement/decompose',
     method: 'post',
     data: { id }
   });
@@ -35,7 +35,7 @@ export function fetchDecomposeRequirement(id: number) {
 
 export function fetchGenerateRequirement(id: number) {
   return request<null>({
-    url: '/requirement/generate',
+    url: '/api/gabriel/requirement/generate',
     method: 'post',
     data: { id }
   });
@@ -43,7 +43,7 @@ export function fetchGenerateRequirement(id: number) {
 
 export function fetchDeleteRequirement(id: number) {
   return request<null>({
-    url: '/requirement/delete',
+    url: '/api/gabriel/requirement/delete',
     method: 'post',
     data: { id }
   });

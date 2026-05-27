@@ -1,0 +1,517 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>需求管理 — 效果图</title>
+    <style>
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+      body {
+        background: #101014;
+        color: #e0e0e0;
+        font-family: -apple-system, 'PingFang SC', sans-serif;
+        font-size: 13px;
+        padding: 24px;
+      }
+
+      .page-title {
+        font-size: 18px;
+        font-weight: 600;
+        color: #fff;
+        margin-bottom: 20px;
+      }
+
+      /* Card wrapper */
+      .card {
+        background: #18181c;
+        border-radius: 8px;
+        padding: 16px;
+      }
+
+      /* Toolbar */
+      .toolbar {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        margin-bottom: 14px;
+      }
+      .btn {
+        display: inline-flex;
+        align-items: center;
+        gap: 5px;
+        padding: 5px 14px;
+        border-radius: 4px;
+        font-size: 12px;
+        cursor: pointer;
+        border: none;
+        font-weight: 500;
+      }
+      .btn-primary {
+        background: #18a058;
+        color: #fff;
+      }
+      .btn-default {
+        background: transparent;
+        color: #e0e0e0;
+        border: 1px solid #3a3a3f;
+      }
+      .btn-default:hover {
+        border-color: #18a058;
+        color: #18a058;
+      }
+      .search-box {
+        flex: 1;
+        max-width: 260px;
+        background: #101014;
+        border: 1px solid #3a3a3f;
+        border-radius: 4px;
+        padding: 5px 10px;
+        color: #e0e0e0;
+        font-size: 12px;
+        display: flex;
+        align-items: center;
+        gap: 6px;
+      }
+      .search-box span {
+        color: #666;
+      }
+
+      /* Table */
+      .table {
+        width: 100%;
+        border-collapse: collapse;
+      }
+      .table th {
+        background: #101014;
+        color: #888;
+        font-weight: 500;
+        padding: 10px 12px;
+        text-align: left;
+        border-bottom: 1px solid #2a2a2f;
+        font-size: 12px;
+      }
+      .table td {
+        padding: 11px 12px;
+        border-bottom: 1px solid #1e1e22;
+        vertical-align: middle;
+      }
+      .table tr:last-child td {
+        border-bottom: none;
+      }
+      .table tr:hover td {
+        background: #1e1e24;
+      }
+
+      /* Tags */
+      .tag {
+        display: inline-flex;
+        align-items: center;
+        gap: 4px;
+        padding: 2px 8px;
+        border-radius: 3px;
+        font-size: 11px;
+        font-weight: 500;
+      }
+      .tag-default {
+        background: rgba(255, 255, 255, 0.08);
+        color: #aaa;
+      }
+      .tag-warning {
+        background: rgba(240, 160, 32, 0.15);
+        color: #f0a020;
+      }
+      .tag-info {
+        background: rgba(32, 128, 240, 0.15);
+        color: #2080f0;
+      }
+      .tag-success {
+        background: rgba(24, 160, 88, 0.15);
+        color: #18a058;
+      }
+      .tag-error {
+        background: rgba(208, 48, 80, 0.15);
+        color: #d03050;
+      }
+
+      /* Spin icon */
+      @keyframes spin {
+        to {
+          transform: rotate(360deg);
+        }
+      }
+      .spin {
+        display: inline-block;
+        width: 10px;
+        height: 10px;
+        border: 1.5px solid currentColor;
+        border-top-color: transparent;
+        border-radius: 50%;
+        animation: spin 0.8s linear infinite;
+      }
+
+      /* Action buttons */
+      .actions {
+        display: flex;
+        align-items: center;
+        gap: 6px;
+        flex-wrap: wrap;
+      }
+      .act-btn {
+        padding: 3px 10px;
+        border-radius: 3px;
+        font-size: 11px;
+        cursor: pointer;
+        border: 1px solid;
+        font-weight: 500;
+        white-space: nowrap;
+      }
+      .act-upload {
+        color: #2080f0;
+        border-color: rgba(32, 128, 240, 0.4);
+        background: rgba(32, 128, 240, 0.08);
+      }
+      .act-decompose {
+        color: #18a058;
+        border-color: rgba(24, 160, 88, 0.4);
+        background: rgba(24, 160, 88, 0.08);
+      }
+      .act-generate {
+        color: #18a058;
+        border-color: rgba(24, 160, 88, 0.4);
+        background: rgba(24, 160, 88, 0.08);
+      }
+      .act-dl-md {
+        color: #2080f0;
+        border-color: rgba(32, 128, 240, 0.4);
+        background: rgba(32, 128, 240, 0.08);
+      }
+      .act-dl-xmind {
+        color: #9b59b6;
+        border-color: rgba(155, 89, 182, 0.4);
+        background: rgba(155, 89, 182, 0.08);
+      }
+      .act-retry {
+        color: #f0a020;
+        border-color: rgba(240, 160, 32, 0.4);
+        background: rgba(240, 160, 32, 0.08);
+      }
+      .act-delete {
+        color: #d03050;
+        border-color: rgba(208, 48, 80, 0.3);
+        background: transparent;
+      }
+      .act-disabled {
+        color: #555;
+        border-color: #333;
+        background: transparent;
+        cursor: not-allowed;
+      }
+
+      /* Error hint */
+      .error-hint {
+        font-size: 11px;
+        color: #d03050;
+        margin-top: 3px;
+      }
+
+      /* Pagination */
+      .pagination {
+        display: flex;
+        align-items: center;
+        justify-content: flex-end;
+        gap: 6px;
+        margin-top: 14px;
+      }
+      .page-btn {
+        width: 28px;
+        height: 28px;
+        border-radius: 4px;
+        border: 1px solid #3a3a3f;
+        background: transparent;
+        color: #e0e0e0;
+        font-size: 12px;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      .page-btn.active {
+        background: #18a058;
+        border-color: #18a058;
+        color: #fff;
+      }
+      .page-info {
+        font-size: 12px;
+        color: #888;
+      }
+
+      /* Modal overlay (示意) */
+      .modal-hint {
+        margin-top: 20px;
+      }
+      .modal-hint h3 {
+        font-size: 13px;
+        color: #888;
+        margin-bottom: 10px;
+        font-weight: 400;
+      }
+      .modal-row {
+        display: flex;
+        gap: 12px;
+      }
+      .modal-box {
+        background: #18181c;
+        border: 1px solid #3a3a3f;
+        border-radius: 8px;
+        padding: 14px;
+        flex: 1;
+      }
+      .modal-box h4 {
+        font-size: 13px;
+        color: #fff;
+        margin-bottom: 10px;
+      }
+      .modal-field {
+        margin-bottom: 10px;
+      }
+      .modal-label {
+        font-size: 11px;
+        color: #888;
+        margin-bottom: 4px;
+      }
+      .mock-input {
+        width: 100%;
+        background: #101014;
+        border: 1px solid #3a3a3f;
+        border-radius: 4px;
+        padding: 6px 10px;
+        color: #e0e0e0;
+        font-size: 12px;
+      }
+      .upload-area {
+        border: 1px dashed #3a3a3f;
+        border-radius: 4px;
+        padding: 12px;
+        text-align: center;
+        color: #666;
+        font-size: 11px;
+      }
+      .upload-area.required {
+        border-color: rgba(32, 128, 240, 0.4);
+      }
+      .required-mark {
+        color: #d03050;
+      }
+      .optional-mark {
+        color: #888;
+        font-size: 10px;
+      }
+      .modal-footer {
+        display: flex;
+        justify-content: flex-end;
+        gap: 8px;
+        margin-top: 12px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="page-title">需求管理</div>
+
+    <div class="card">
+      <!-- Toolbar -->
+      <div class="toolbar">
+        <button class="btn btn-primary">＋ 新建需求</button>
+        <div class="search-box">
+          <span>🔍</span>
+          <span style="color: #555">搜索需求名称...</span>
+        </div>
+        <button class="btn btn-default" style="margin-left: auto">↻ 刷新</button>
+      </div>
+
+      <!-- Table -->
+      <table class="table">
+        <thead>
+          <tr>
+            <th style="width: 50px">序号</th>
+            <th>需求名称</th>
+            <th style="width: 110px">状态</th>
+            <th style="width: 130px">创建时间</th>
+            <th style="width: 280px">操作</th>
+          </tr>
+        </thead>
+        <tbody>
+          <!-- Row 1: 待处理 (刚创建，未上传) -->
+          <tr>
+            <td style="color: #666">1</td>
+            <td>用户中心改版需求</td>
+            <td><span class="tag tag-default">待处理</span></td>
+            <td style="color: #888">2026-05-21 09:12</td>
+            <td>
+              <div class="actions">
+                <button class="act-btn act-upload">↑ 上传文件</button>
+                <button class="act-btn act-decompose" style="opacity: 0.4; cursor: not-allowed">触发拆解</button>
+                <button class="act-btn act-delete">删除</button>
+              </div>
+            </td>
+          </tr>
+
+          <!-- Row 2: 待处理 (已上传) -->
+          <tr>
+            <td style="color: #666">2</td>
+            <td>支付流程优化需求</td>
+            <td><span class="tag tag-default">待处理</span></td>
+            <td style="color: #888">2026-05-21 10:05</td>
+            <td>
+              <div class="actions">
+                <button class="act-btn act-upload">↑ 重新上传</button>
+                <button class="act-btn act-decompose">触发拆解</button>
+                <button class="act-btn act-delete">删除</button>
+              </div>
+            </td>
+          </tr>
+
+          <!-- Row 3: 拆解中 -->
+          <tr>
+            <td style="color: #666">3</td>
+            <td>消息通知系统需求</td>
+            <td>
+              <span class="tag tag-warning">
+                <span class="spin"></span>
+                拆解中
+              </span>
+            </td>
+            <td style="color: #888">2026-05-21 10:30</td>
+            <td>
+              <div class="actions">
+                <button class="act-btn act-disabled">拆解中...</button>
+                <button class="act-btn act-delete">删除</button>
+              </div>
+            </td>
+          </tr>
+
+          <!-- Row 4: 拆解完成 -->
+          <tr>
+            <td style="color: #666">4</td>
+            <td>权限管理模块需求</td>
+            <td><span class="tag tag-info">拆解完成</span></td>
+            <td style="color: #888">2026-05-20 16:22</td>
+            <td>
+              <div class="actions">
+                <button class="act-btn act-generate">⚡ 生成用例</button>
+                <button class="act-btn act-delete">删除</button>
+              </div>
+            </td>
+          </tr>
+
+          <!-- Row 5: 生成中 -->
+          <tr>
+            <td style="color: #666">5</td>
+            <td>数据导出功能需求</td>
+            <td>
+              <span class="tag tag-warning">
+                <span class="spin"></span>
+                生成中
+              </span>
+            </td>
+            <td style="color: #888">2026-05-20 14:10</td>
+            <td>
+              <div class="actions">
+                <button class="act-btn act-disabled">生成中...</button>
+                <button class="act-btn act-delete">删除</button>
+              </div>
+            </td>
+          </tr>
+
+          <!-- Row 6: 已完成 -->
+          <tr>
+            <td style="color: #666">6</td>
+            <td>登录功能需求</td>
+            <td><span class="tag tag-success">✓ 已完成</span></td>
+            <td style="color: #888">2026-05-20 09:00</td>
+            <td>
+              <div class="actions">
+                <button class="act-btn act-dl-md">↓ 下载 MD</button>
+                <button class="act-btn act-dl-xmind">↓ 下载 XMind</button>
+                <button class="act-btn act-delete">删除</button>
+              </div>
+            </td>
+          </tr>
+
+          <!-- Row 7: 失败 -->
+          <tr>
+            <td style="color: #666">7</td>
+            <td>搜索功能需求</td>
+            <td><span class="tag tag-error">✕ 失败</span></td>
+            <td style="color: #888">2026-05-19 17:45</td>
+            <td>
+              <div class="actions">
+                <button class="act-btn act-retry">↺ 重试</button>
+                <button class="act-btn act-delete">删除</button>
+              </div>
+              <div class="error-hint">Dify 调用超时，请重试</div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+
+      <!-- Pagination -->
+      <div class="pagination">
+        <span class="page-info">共 7 条</span>
+        <button class="page-btn">‹</button>
+        <button class="page-btn active">1</button>
+        <button class="page-btn">2</button>
+        <button class="page-btn">›</button>
+      </div>
+    </div>
+
+    <!-- Modals hint -->
+    <div class="modal-hint">
+      <h3>— 弹窗示意（点击按钮后弹出）—</h3>
+      <div class="modal-row">
+        <!-- Create modal -->
+        <div class="modal-box">
+          <h4>新建需求</h4>
+          <div class="modal-field">
+            <div class="modal-label">
+              需求名称
+              <span class="required-mark">*</span>
+            </div>
+            <input class="mock-input" placeholder="请输入需求名称" />
+          </div>
+          <div class="modal-footer">
+            <button class="btn btn-default" style="font-size: 12px">取消</button>
+            <button class="btn btn-primary" style="font-size: 12px">确认</button>
+          </div>
+        </div>
+
+        <!-- Upload modal -->
+        <div class="modal-box">
+          <h4>上传文件</h4>
+          <div class="modal-field">
+            <div class="modal-label">
+              需求文档
+              <span class="required-mark">*</span>
+              <span style="font-size: 10px; color: #666">（.md 文件）</span>
+            </div>
+            <div class="upload-area required">点击或拖拽上传需求 MD 文件</div>
+          </div>
+          <div class="modal-field">
+            <div class="modal-label">
+              技术方案
+              <span class="optional-mark">（选填）</span>
+            </div>
+            <div class="upload-area">点击或拖拽上传技术方案 MD 文件</div>
+          </div>
+          <div class="modal-footer">
+            <button class="btn btn-default" style="font-size: 12px">取消</button>
+            <button class="btn btn-primary" style="font-size: 12px">上传</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
