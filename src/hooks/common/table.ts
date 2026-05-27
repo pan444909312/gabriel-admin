@@ -236,10 +236,10 @@ export function defaultTransform<ApiData>(
   const { data, error } = response;
 
   if (!error) {
-    const { records, current, size, total } = data;
+    const { list, current, size, total } = data;
 
     return {
-      data: records,
+      data: list,
       pageNum: current,
       pageSize: size,
       total

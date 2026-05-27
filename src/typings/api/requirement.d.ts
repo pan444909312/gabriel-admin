@@ -21,10 +21,11 @@ declare namespace Api {
       id: number;
       name: string;
       status: Status;
-      requirementFilePath: string | null;
       features: string | null;
+      testCases: string | null;
       errorMessage: string | null;
       createTime: string;
+      updateTime: string;
     }
 
     type PageParams = Api.Common.CommonSearchParams & { name?: string };

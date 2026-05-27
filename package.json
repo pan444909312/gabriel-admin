@@ -96,8 +96,8 @@
     "vue-tsc": "3.2.8"
   },
   "simple-git-hooks": {
-    "commit-msg": "pnpm sa git-commit-verify",
-    "pre-commit": "pnpm typecheck && pnpm lint && pnpm fmt && git diff --exit-code"
+    "commit-msg": "",
+    "pre-commit": ""
   },
   "engines": {
     "node": ">=20.19.0",

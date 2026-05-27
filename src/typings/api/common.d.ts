@@ -17,7 +17,7 @@ declare namespace Api {
 
     /** common params of paginating query list data */
     interface PaginatingQueryRecord<T = any> extends PaginatingCommonParams {
-      records: T[];
+      list: T[];
     }
 
     /** common search params of table */

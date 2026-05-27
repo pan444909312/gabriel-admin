@@ -40,7 +40,7 @@ async function loadData() {
   });
   loading.value = false;
   if (!error && res) {
-    data.value = res.records;
+    data.value = res.list;
     total.value = res.total;
   }
 }
@@ -58,7 +58,7 @@ function startPolling() {
       name: searchName.value || undefined
     });
     if (!error && res) {
-      data.value = res.records;
+      data.value = res.list;
       total.value = res.total;
     }
   }, 3000);
@@ -177,7 +177,7 @@ const columns = computed<DataTableColumns<Api.Requirement.Item>>(() => [
     width: 300,
     render: row => {
       const btns: ReturnType<typeof h>[] = [];
-      const { status, id, requirementFilePath, errorMessage } = row;
+      const { status, id, features, errorMessage } = row;
 
       if (status === 0) {
         btns.push(
@@ -186,7 +186,7 @@ const columns = computed<DataTableColumns<Api.Requirement.Item>>(() => [
             { size: 'small', type: 'primary', ghost: true, onClick: () => uploadModalRef.value?.open(id) },
             {
               default: () =>
-                requirementFilePath ? $t('page.requirement.actions.reUpload') : $t('page.requirement.actions.upload')
+                features ? $t('page.requirement.actions.reUpload') : $t('page.requirement.actions.upload')
             }
           ),
           h(
@@ -195,7 +195,7 @@ const columns = computed<DataTableColumns<Api.Requirement.Item>>(() => [
               size: 'small',
               type: 'primary',
               ghost: true,
-              disabled: !requirementFilePath,
+              disabled: !features,
               onClick: () => handleDecompose(id)
             },
             { default: () => $t('page.requirement.actions.decompose') }
