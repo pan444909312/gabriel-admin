@@ -13,12 +13,14 @@ import {
 } from '@/service/api/requirement';
 import CreateModal from './modules/create-modal.vue';
 import UploadModal from './modules/upload-modal.vue';
+import DetailModal from './modules/detail-modal.vue';
 
 defineOptions({ name: 'RequirementPage' });
 
 const message = useMessage();
 const createModalRef = ref<InstanceType<typeof CreateModal>>();
 const uploadModalRef = ref<InstanceType<typeof UploadModal>>();
+const detailModalRef = ref<InstanceType<typeof DetailModal>>();
 
 const loading = ref(false);
 const data = ref<Api.Requirement.Item[]>([]);
@@ -140,6 +142,17 @@ const columns = computed<DataTableColumns<Api.Requirement.Item>>(() => [
     key: 'name',
     title: $t('page.requirement.columns.name'),
     minWidth: 160
+  },
+  {
+    key: 'content',
+    title: '文档内容',
+    width: 140,
+    render: row =>
+      h(
+        NButton,
+        { size: 'small', text: true, type: 'primary', onClick: () => detailModalRef.value?.open(row.id) },
+        { default: () => '需求文档 / 技术方案' }
+      )
   },
   {
     key: 'status',
@@ -318,5 +331,6 @@ onUnmounted(() => stopPolling());
 
     <CreateModal ref="createModalRef" @success="refresh" />
     <UploadModal ref="uploadModalRef" @success="refresh" />
+    <DetailModal ref="detailModalRef" />
   </div>
 </template>

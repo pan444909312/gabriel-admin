@@ -309,7 +309,7 @@ const local: App.I18n.Schema = {
       createBtn: '新建需求',
       searchPlaceholder: '搜索需求名称...',
       columns: {
-        index: '序号',
+        index: 'id',
         name: '需求名称',
         status: '状态',
         createTime: '创建时间',

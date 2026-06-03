@@ -8,6 +8,14 @@ export function fetchRequirementPage(params: Api.Requirement.PageParams) {
   });
 }
 
+export function getRequirementDetail(id: number) {
+  return request<Api.Requirement.Detail>({
+    url: '/api/gabriel/requirement/detail',
+    method: 'get',
+    params: { id }
+  });
+}
+
 export function fetchCreateRequirement(name: string) {
   return request<null>({
     url: '/api/gabriel/requirement/create',

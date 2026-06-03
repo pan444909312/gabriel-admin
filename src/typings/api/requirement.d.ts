@@ -17,6 +17,13 @@ declare namespace Api {
      */
     type Status = 0 | 1 | 2 | 3 | 4 | 5;
 
+    interface Detail {
+      id: number;
+      name: string;
+      requirementContent: string | null;
+      techContent: string | null;
+    }
+
     interface Item {
       id: number;
       name: string;
