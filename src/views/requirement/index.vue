@@ -134,7 +134,7 @@ const columns = computed<DataTableColumns<Api.Requirement.Item>>(() => [
     key: 'index',
     title: $t('page.requirement.columns.index'),
     width: 60,
-    render: (_row, index) => (current.value - 1) * size.value + index + 1
+    render: (row) => row.id
   },
   {
     key: 'name',
@@ -177,7 +177,7 @@ const columns = computed<DataTableColumns<Api.Requirement.Item>>(() => [
     width: 300,
     render: row => {
       const btns: ReturnType<typeof h>[] = [];
-      const { status, id, features, errorMessage } = row;
+      const { status, id, errorMessage } = row;
 
       if (status === 0) {
         btns.push(
@@ -185,8 +185,7 @@ const columns = computed<DataTableColumns<Api.Requirement.Item>>(() => [
             NButton,
             { size: 'small', type: 'primary', ghost: true, onClick: () => uploadModalRef.value?.open(id) },
             {
-              default: () =>
-                features ? $t('page.requirement.actions.reUpload') : $t('page.requirement.actions.upload')
+              default: () => $t('page.requirement.actions.upload')
             }
           ),
           h(
@@ -195,7 +194,6 @@ const columns = computed<DataTableColumns<Api.Requirement.Item>>(() => [
               size: 'small',
               type: 'primary',
               ghost: true,
-              disabled: !features,
               onClick: () => handleDecompose(id)
             },
             { default: () => $t('page.requirement.actions.decompose') }
