@@ -85,5 +85,29 @@ export const generatedRoutes: GeneratedRoute[] = [
       icon: 'mdi:file-document-outline',
       order: 2
     }
+  },
+  {
+    name: 'test-tool',
+    path: '/test-tool',
+    component: 'layout.base',
+    meta: {
+      title: 'test-tool',
+      i18nKey: 'route.test-tool',
+      icon: 'mdi:tools',
+      order: 3
+    },
+    children: [
+      {
+        name: 'test-tool_rc4-decode',
+        path: '/test-tool/rc4-decode',
+        component: 'view.test-tool_rc4-decode',
+        meta: {
+          title: 'test-tool_rc4-decode',
+          i18nKey: 'route.test-tool_rc4-decode',
+          icon: 'mdi:lock-open-outline',
+          order: 1
+        }
+      }
+    ]
   }
 ];

@@ -24,6 +24,8 @@ declare module "@elegant-router/types" {
     "iframe-page": "/iframe-page/:url";
     "login": "/login/:module(pwd-login|code-login|register|reset-pwd|bind-wechat)?";
     "requirement": "/requirement";
+    "test-tool": "/test-tool";
+    "test-tool_rc4-decode": "/test-tool/rc4-decode";
   };
 
   /**
@@ -62,6 +64,7 @@ declare module "@elegant-router/types" {
     | "iframe-page"
     | "login"
     | "requirement"
+    | "test-tool"
   >;
 
   /**
@@ -85,6 +88,7 @@ declare module "@elegant-router/types" {
     | "login"
     | "home"
     | "requirement"
+    | "test-tool_rc4-decode"
   >;
 
   /**

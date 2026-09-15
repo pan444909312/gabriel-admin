@@ -226,7 +226,9 @@ const local: App.I18n.Schema = {
     500: '服务器错误',
     'iframe-page': '外链页面',
     home: '首页',
-    requirement: '需求管理'
+    requirement: '需求管理',
+    'test-tool': '测试工具',
+    'test-tool_rc4-decode': 'rc4解码'
   },
   page: {
     login: {

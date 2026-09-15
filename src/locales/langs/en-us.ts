@@ -230,7 +230,9 @@ const local: App.I18n.Schema = {
     500: 'Server Error',
     'iframe-page': 'Iframe',
     home: 'Home',
-    requirement: 'Requirement'
+    requirement: 'Requirement',
+    'test-tool': 'Test Tool',
+    'test-tool_rc4-decode': 'RC4 Decode'
   },
   page: {
     login: {
