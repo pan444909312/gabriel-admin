@@ -171,6 +171,7 @@ const routeMap: RouteMap = {
   "login": "/login/:module(pwd-login|code-login|register|reset-pwd|bind-wechat)?",
   "requirement": "/requirement",
   "test-tool": "/test-tool",
+  "test-tool_aes-crypto": "/test-tool/aes-crypto",
   "test-tool_rc4-decode": "/test-tool/rc4-decode"
 };
 

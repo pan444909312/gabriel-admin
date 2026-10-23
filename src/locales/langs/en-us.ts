@@ -232,6 +232,7 @@ const local: App.I18n.Schema = {
     home: 'Home',
     requirement: 'Requirement',
     'test-tool': 'Test Tool',
+    'test-tool_aes-crypto': 'AES Crypto',
     'test-tool_rc4-decode': 'RC4 Decode'
   },
   page: {

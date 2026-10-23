@@ -98,6 +98,17 @@ export const generatedRoutes: GeneratedRoute[] = [
     },
     children: [
       {
+        name: 'test-tool_aes-crypto',
+        path: '/test-tool/aes-crypto',
+        component: 'view.test-tool_aes-crypto',
+        meta: {
+          title: 'test-tool_aes-crypto',
+          i18nKey: 'route.test-tool_aes-crypto',
+          icon: 'mdi:shield-key-outline',
+          order: 2
+        }
+      },
+      {
         name: 'test-tool_rc4-decode',
         path: '/test-tool/rc4-decode',
         component: 'view.test-tool_rc4-decode',

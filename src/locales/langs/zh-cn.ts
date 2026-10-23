@@ -228,6 +228,7 @@ const local: App.I18n.Schema = {
     home: '首页',
     requirement: '需求管理',
     'test-tool': '测试工具',
+    'test-tool_aes-crypto': 'AES加解密',
     'test-tool_rc4-decode': 'rc4解码'
   },
   page: {
